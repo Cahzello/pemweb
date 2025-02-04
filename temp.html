@@ -1,0 +1,89 @@
+<head>
+    <link rel="stylesheet" href="w3.css">
+</head>
+<body>
+    <center>
+        <div class="w3-container w3-red">
+            <p>
+            <div class="w3-container w3-blue">
+                <h2>Tiket Kereta Api</h2>
+                <div class="w3-panel w3-yellow">
+                    <p>
+                    <form name="form" id="form">
+                        <table>
+                            <tr>
+                                <td>Nama Pemesan:</td>
+                                <td><input type="text"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><b>Kota</b></td>
+                                <td><b>Kelas</b></td>
+                                <td><b>Jumlah</b></td>
+                                <td><b>Harga</b></td>
+                                <td><b>Total</b></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="kota">
+                                        <option>Bandung</option>
+                                        <option>Jakarta</option>
+                                        <option>Surabaya</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="kelas">
+                                        <option>Ekonomi</option>
+                                        <option>Bisnis</option>
+                                        <option>Eksekutif</option>
+                                    </select>
+                                </td>
+                                <td><input type="number" name="jumlahTiket"></td>
+                                <td><input type="text" name="hargaTiket" readonly></td>
+                                <td><input type="text" name="totalHargaTiket" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Tambahan:</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="makan">Makan</td>
+                                <td></td>
+                                <td><input type="number" name="jumlahMakan"></td>
+                                <td><input type="text" name="harrgaMakan" readonly></td>
+                                <td><input type="text" name="totalHargaMakan"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="minum">Minum</td>
+                                <td></td>
+                                <td><input type="number" name="jumlahMinum"></td>
+                                <td><input type="text" name="harrgaMinum" readonly></td>
+                                <td><input type="text" name="totalHargaMinum" readonly></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="snack">Snack</td>
+                                <td></td>
+                                <td><input type="number" name="jumlahSnack"></td>
+                                <td><input type="text" name="harrgaSnack" readonly></td>
+                                <td><input type="text" name="totalHargaSnack" readonly></td>
+                            </tr>
+                        </table>
+                    </form>
+                    </p>
+                </div>
+                <div class="w3-panel footer w3-yellow">
+                    <p>
+                        <input type="button" value="Proses" onclick="hitung()" class="w3-btn w3-black">
+                        <input type="button" value="Reset" onclick="reset()" class="w3-btn w3-black">
+                    </p>
+                </div>
+            </div>
+            </p>
+        </div>
+
+    </center>

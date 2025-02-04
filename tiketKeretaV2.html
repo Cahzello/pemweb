@@ -1,0 +1,230 @@
+<head>
+    <link rel="stylesheet" href="w3.css">
+    <style>
+        #first {
+            height: 100vh;
+        }
+    </style>
+</head>
+<center>
+    <div class="w3-container w3-red">
+        <div class="w3-panel w3-blue">
+            <form name="tiketKereta">
+                <h1>Tiket Kereta Api</h1>
+
+                <div class="w3-panel w3-yellow">
+
+                    <table>
+                        <tr>
+                            <td>Nama Pemesan</td>
+                            <td>
+                                :<input type="text" name="pemesan">
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <th align="center">Kota</th>
+                            <th align="center">Kelas</th>
+                            <th align="center">Jumlah</th>
+                            <th align="center">Harga</th>
+                            <th align="center">Total</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="kota">
+                                    <option value="Bandung">Bandung</option>
+                                    <option value="Jakarta">Jakarta</option>
+                                    <option value="Surabaya">Surabaya</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="kelas">
+                                    <option value="Ekonomi">Ekonomi</option>
+                                    <option value="Bisnis">Bisnis</option>
+                                    <option value="Eksekutif">Eksekutif</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="jumlah">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" name="harga" readonly>
+                            </td>
+                            <td>
+                                <input type="text" name="totalTiket" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">Tambahan:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="checkbox" name="tambahanMakan" value="Makan">Makan
+                            </td>
+                            <td>
+                                <input type="text" name="jumlahMakan" size="10">
+                            </td>
+                            <td>
+                                <input type="text" name="hargaMakan" readonly>
+                            </td>
+                            <td>
+                                <input type="text" name="totalHargaMakan" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="checkbox" name="tambahanMinum" value="Minum">Minum
+                            </td>
+                            <td>
+                                <input type="text" name="jumlahMinum" size="10">
+                            </td>
+                            <td>
+                                <input type="text" name="hargaMinum" readonly>
+                            </td>
+                            <td>
+                                <input type="text" name="totalHargaMinum" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="checkbox" name="tambahanSnack" value="Snack">Snack
+                            </td>
+                            <td>
+                                <input type="text" name="jumlahSnack" size="10">
+                            </td>
+                            <td>
+                                <input type="text" name="hargaSnack" readonly>
+                            </td>
+                            <td>
+                                <input type="text" name="totalHargaSnack" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><br></td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="4"></td>
+                            <td>
+                                <input type="text" name="Total" readonly>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="w3-panel w3-yellow">
+                    <p>
+                        <input type="button" value="Proses" onclick="hitung()" class="w3-btn w3-black">
+                        <input type="reset" value="Reset" class="w3-btn w3-black">
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</center>
+
+<script>
+    function hitung() {
+        let kota = document.tiketKereta.kota.value;
+        let kelas = document.tiketKereta.kelas.value;
+        let jumlah = document.tiketKereta.jumlah.value;
+
+        let tambahanMakan = document.tiketKereta.tambahanMakan.checked;
+        let tambahanMinum = document.tiketKereta.tambahanMinum.checked;
+        let tambahanSnack = document.tiketKereta.tambahanSnack.checked;
+
+        let jumlah_makanan = document.tiketKereta.jumlahMakan.value
+        let jumlah_minum = document.tiketKereta.jumlahMinum.value
+        let jumlah_snack = document.tiketKereta.jumlahSnack.value
+
+        let hargaTiket = 0;
+        let totalTiket = 0;
+
+        let hargaMakan = 0;
+        let hargaMinum = 0;
+        let hargaSnack = 0;
+
+        let totalMakan = 0
+        let totalMinum = 0
+        let totalSnack = 0
+
+        const DataTiket = {
+            bandung: {
+                ekonomi: 7000,
+                bisnis: 8000,
+                eksekutif: 9000
+            },
+            jakarta: {
+                ekonomi: 10000,
+                bisnis: 15000,
+                eksekutif: 20000
+            },
+            surabaya: {
+                ekonomi: 15000,
+                bisnis: 20000,
+                eksekutif: 30000
+            }
+        }
+
+        switch (kota) {
+            case "Bandung":
+                if (kelas === 'Ekonomi') {
+                    hargaTiket = DataTiket.bandung.ekonomi;
+                } else if (kelas === 'Bisnis') {
+                    hargaTiket = DataTiket.bandung.bisnis;
+                } else {
+                    hargaTiket = DataTiket.bandung.eksekutif;
+                }
+                break;
+            case "Jakarta":
+                if (kelas === 'Ekonomi') {
+                    hargaTiket = DataTiket.jakarta.ekonomi;
+                } else if (kelas === 'Bisnis') {
+                    hargaTiket = DataTiket.jakarta.bisnis;
+                } else {
+                    hargaTiket = DataTiket.jakarta.eksekutif;
+                }
+                break;
+            case "Surabaya":
+                if (kelas === 'Ekonomi') {
+                    hargaTiket = DataTiket.surabaya.ekonomi;
+                } else if (kelas === 'Bisnis') {
+                    hargaTiket = DataTiket.surabaya.bisnis;
+                } else {
+                    hargaTiket = DataTiket.surabaya.eksekutif;
+                }
+                break;
+        }
+
+        totalTiket = hargaTiket * jumlah;
+
+        if(tambahanMakan) hargaMakan += 25000;
+        if(tambahanMinum) hargaMinum += 10000;
+        if(tambahanSnack) hargaSnack += 5000;
+
+        totalMakan = hargaMakan * jumlah_makanan;
+        totalMinum = hargaMinum * jumlah_minum;
+        totalSnack = hargaSnack * jumlah_snack;
+
+        document.tiketKereta.harga.value = hargaTiket;
+        document.tiketKereta.totalTiket.value = totalTiket;
+
+        document.tiketKereta.hargaMakan.value = hargaMakan;
+        document.tiketKereta.hargaMinum.value = hargaMinum;
+        document.tiketKereta.hargaSnack.value = hargaSnack;
+        
+        document.tiketKereta.totalHargaMakan.value = totalMakan;
+        document.tiketKereta.totalHargaMinum.value = totalMinum;
+        document.tiketKereta.totalHargaSnack.value = totalSnack;
+
+        document.tiketKereta.Total.value = totalTiket + totalMakan + totalMinum + totalSnack
+
+
+    }
+</script>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiket Kereta Api</title>
+    <link rel="stylesheet" href="w3.css">
+    <style>
+
+        .w3-container {
+            margin-top: 50px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <center>
+        <div class="w3-container  w3-red">
+            <p>
+            <div class="w3-panel w3-blue">
+                <h2>TIKET KERETA API</h2>
+                <div class="w3-panel w3-yellow">
+                    <p>
+                        <form name="form" id="form">
+                            <table>
+                                <tr>
+                                    <td>Nama Pemesan: </td>
+                                    <td><input type="text"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Kota</b></td>
+                                    <td><b>Kelas</b></td>
+                                    <td><b>Jumlah</b></td>
+                                    <td><b>Harga</b></td>
+                                    <td><b>Total</b></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="kota" id="kota">
+                                            <option>Bandung</option>
+                                            <option>Jakarta</option>
+                                            <option>Surabaya</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="kelas" id="kelas">
+                                            <option>Ekonomi</option>
+                                            <option>Bisnis</option>
+                                            <option>Eksekutif</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="number" id="jumlahTiket" name="jumlahTiket" min="0" step="1"></td>
+                                    <td><input type="text" id="hargaTiket" name="hargaTiket" readonly></td>
+                                    <td><input type="text" id="totalHargaTiket" name="totalHargaTiket" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td>Tambahan:</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="makan">Makan</td>
+                                    <td></td>
+                                    <td><input type="number" id="jumlahMakan" name="jumlahMakan" min="0" step="1"></td>
+                                    <td><input type="text" id="hargaMakan" name="hargaMakan" readonly></td>
+                                    <td><input type="text" id="totalHargaMakan" name="totalHargaMakan" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="minum">Minum</td>
+                                    <td></td>
+                                    <td><input type="number" id="jumlahMinum" name="jumlahMinum" min="0" step="1"></td>
+                                    <td><input type="text" id="hargaMinum" name="hargaMinum" readonly></td>
+                                    <td><input type="text" id="totalHargaMinum" name="totalHargaMinum" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="snack">Snack</td>
+                                    <td></td>
+                                    <td><input type="number" id="jumlahSnack" name="jumlahSnack" min="0" step="1"></td>
+                                    <td><input type="text" id="hargaSnack" name="hargaSnack" readonly></td>
+                                    <td><input type="text" id="totalHargaSnack" name="totalHargaSnack" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Total Bayar :</b></td>
+                                    <td><input type="text" name="totalBayar" readonly></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </p>
+                </div>
+                <div class="w3-panel footer w3-yellow">
+                    <p>
+                        <input type="button" value="Proses" onclick="hitung()" class="w3-btn w3-black">
+                        <input type="button" value="Reset" onclick="resetForm()" class="w3-btn w3-black">
+                    </p>
+                </div>
+            </div>
+            </p>
+        </div>
+    </center>
+
+    <script>
+
+        const listHargaTiket = {
+            Bandung : {Ekonomi : 70000, Bisnis : 80000, Eksekutif : 90000},
+            Jakarta : {Ekonomi : 100000, Bisnis : 110000, Eksekutif : 120000},
+            Surabaya : {Ekonomi : 130000, Bisnis : 140000, Eksekutif : 150000},
+        }
+
+        function hitung() {
+            let kota = document.getElementById("kota").value
+            let kelas = document.getElementById("kelas").value
+            let jumlahTiket = document.getElementById("jumlahTiket").value
+            let hargaTiket = listHargaTiket[kota][kelas]
+            let jumlahMakan = document.getElementById("jumlahMakan").value
+            let hargaMakan = 0
+            let jumlahMinum = document.getElementById("jumlahMinum").value
+            let hargaMinum = 0
+            let jumlahSnack = document.getElementById("jumlahSnack").value
+            let hargaSnack = 0
+
+            if (document.form.makan.checked) {
+                hargaMakan = 20000
+            }
+            if (document.form.minum.checked) {
+                hargaMinum = 5000
+            }
+            if (document.form.snack.checked) {
+                hargaSnack = 20000
+            }
+
+            let totalHargaTiket = hargaTiket * jumlahTiket
+            let totalHargaMakan = hargaMakan * jumlahMakan
+            let totalHargaMinum = hargaMinum * jumlahMinum
+            let totalHargaSnack = hargaSnack * jumlahSnack
+            let totalBayar = totalHargaTiket + totalHargaMakan + totalHargaMinum + totalHargaSnack
+
+            document.form.hargaTiket.value = hargaTiket.toLocaleString("id-ID");
+            document.form.totalHargaTiket.value = totalHargaTiket.toLocaleString("id-ID");
+            document.form.hargaMakan.value = hargaMakan.toLocaleString("id-ID");
+            document.form.totalHargaMakan.value = totalHargaMakan.toLocaleString("id-ID");
+            document.form.hargaMinum.value = hargaMinum.toLocaleString("id-ID");
+            document.form.totalHargaMinum.value = totalHargaMinum.toLocaleString("id-ID");
+            document.form.hargaSnack.value = hargaSnack.toLocaleString("id-ID");
+            document.form.totalHargaSnack.value = totalHargaSnack.toLocaleString("id-ID");
+            document.form.totalBayar.value = totalBayar.toLocaleString("id-ID");
+        }
+
+        function resetForm() {
+            document.form.reset()
+        }
+    </script>
+
+</body>
+</html>
