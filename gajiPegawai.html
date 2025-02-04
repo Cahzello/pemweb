@@ -1,0 +1,171 @@
+<head>
+    <link rel="stylesheet" href="w3.css">
+</head>
+
+<center>
+    <div class="w3-container">
+        <form name="gajiPegawai">
+            <div class="w3-panel w3-red">
+                <h1>Program Gaji Pegawai</h1>
+            </div>
+
+            <div class="w3-panel w3-cyan">
+                <table>
+                    <tr>
+                        <td>Nama Pegawai</td>
+                        <td><input type="text" name="namaPegawai"></td>
+                    </tr>
+                    <tr>
+                        <td>Bagian</td>
+                        <td>
+                            <select name="bagian">
+                                <option value="HRD">HRD</option>
+                                <option value="Pemasaran">Pemasaran</option>
+                                <option value="Produksi">Produksi</option>
+                                <option value="OB">OB</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Anak</td>
+                        <td><input type="radio" name="jumlahAnak" value="satu">Satu
+                            <input type="radio" name="jumlahAnak" value="dua">Dua
+                            <input type="radio" name="jumlahAnak" value="tiga">Tiga
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tunjungan</td>
+                        <td>
+                            <input type="checkbox" name="tunjangan" value="makan">Makan
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" name="tunjangan" value="transport">transport
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="checkbox" name="tunjangan" value="kesehatan">kesehatan
+
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <table>
+                    <tr>
+                        <td>
+                            Gaji Pokok
+                        </td>
+                        <td><input type="text" name="fieldGajiPokok"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tunjangan Anak
+                        </td>
+                        <td><input type="text" name="fieldTunjanganAnak"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tunjangan Lain
+                        </td>
+                        <td><input type="text" name="fieldTunjanganLain"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="w3-panel w3-blue">
+                <p>
+                    <input type="button" value="Proses" class="w3-btn w3-red w3-round-xxlarge" onclick="hitung()">
+                    <input type="reset" value="Reset" class="w3-btn w3-yellow w3-round-xxlarge">
+                </p>
+            </div>
+
+        </form>
+    </div>
+</center>
+
+<script>
+    function hitung() {
+        let divisiBagian = document.gajiPegawai.bagian.value;
+        let jumlahAnak = document.gajiPegawai.jumlahAnak.value;
+        let tunjanganKerja = document.gajiPegawai.tunjangan
+        let gajiPokok = 0;
+        let outputTunjanganAnak = 0;
+        let outputTunjanganLain = 0;
+
+        const DataBagian = {
+            HRD: 8000000,
+            Pemasaran: 6000000,
+            Produksi: 7000000,
+            OB: 3000000
+        }
+
+        const DataTunjangan = {
+            makan: 0.10,
+            transport: 0.15,
+            kesehatan: 0.20,
+            anak: 0.10
+        }
+
+        switch (divisiBagian) {
+            case "HRD":
+                gajiPokok = DataBagian.HRD;
+                break;
+            case "Pemasaran":
+                gajiPokok = DataBagian.Pemasaran;
+                break;
+            case "Produksi":
+                gajiPokok = DataBagian.Produksi;
+                break;
+            case "OB":
+                gajiPokok = DataBagian.OB;
+                break;
+            default:
+                gajiPokok = 0;
+                break;
+        }
+        
+        switch (jumlahAnak) {
+            case "satu":
+                tempGaji = gajiPokok * DataTunjangan.anak;
+                outputTunjanganAnak = Number.parseInt(tempGaji);
+                gajiPokok += tempGaji
+            case "dua":
+                tempGaji = gajiPokok * (DataTunjangan.anak * 2);
+                outputTunjanganAnak = Number.parseInt(tempGaji);
+                gajiPokok += tempGaji
+            case "tiga":
+                tempGaji = gajiPokok * (DataTunjangan.anak * 3);
+                outputTunjanganAnak = Number.parseInt(tempGaji);
+                gajiPokok += tempGaji
+        }
+
+        for (let i = 0; i < tunjanganKerja.length; i++) {
+            if (tunjanganKerja[i].value === 'makan' && tunjanganKerja[i].checked == true) {
+                tempGaji = gajiPokok * DataTunjangan.makan;
+                outputTunjanganLain = tempGaji;
+                gajiPokok += tempGaji
+            } else if (tunjanganKerja[i].value === 'transport' && tunjanganKerja[i].checked == true) {
+                tempGaji = gajiPokok * DataTunjangan.transport;
+                outputTunjanganLain = tempGaji;
+                gajiPokok += tempGaji
+            } else if (tunjanganKerja[i].value === 'kesehatan' && tunjanganKerja[i].checked == true) {
+                tempGaji = gajiPokok * DataTunjangan.kesehatan;
+                outputTunjanganLain = tempGaji;
+                gajiPokok += tempGaji
+            } else {
+                tempGaji = 0;
+            }
+        }
+
+        document.gajiPegawai.fieldGajiPokok.value = gajiPokok;
+        document.gajiPegawai.fieldTunjanganAnak.value = outputTunjanganAnak;
+        document.gajiPegawai.fieldTunjanganLain.value = outputTunjanganLain;
+
+    }
+</script>

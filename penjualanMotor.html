@@ -1,0 +1,119 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="w3.css">
+</head>
+
+<center>
+    <div class="w3-container">
+        <form name="gajiPegawai">
+            <div class="w3-panel w3-red">
+                <h1>Program Penjualan Motor</h1>
+            </div>
+
+            <div class="w3-panel w3-cyan">
+                <table>
+                    <tr>
+                        <td>Nama Pembeli</td>
+                        <td><input type="text" name="namaPegawai"></td>
+                    </tr>
+                    <tr>
+                        <td>Merk</td>
+                        <td>
+                            <select name="Merk">
+                                <option value="Vario">Vario</option>
+                                <option value="Beat">Beat</option>
+                                <option value="Megapro">Megapro</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah</td>
+                        <td>
+                            <select name="jumlah">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <table>
+                    <tr>
+                        <td>
+                            Harga Motor
+                        </td>
+                        <td><input type="text" name="fieldHargaMotor"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total Harga
+                        </td>
+                        <td><input type="text" name="fieldTotalHarga"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Bonus
+                        </td>
+                        <td><input type="text" name="fieldBonus"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="w3-panel w3-blue">
+                <p>
+                    <input type="button" value="Proses" class="w3-btn w3-red w3-round-xxlarge" onclick="hitung()">
+                    <input type="reset" value="Reset" class="w3-btn w3-yellow w3-round-xxlarge">
+                </p>
+            </div>
+
+        </form>
+    </div>
+</center>
+
+<script>
+    function hitung() {
+        let merkMotor = document.gajiPegawai.Merk.value;
+        let jumlahDibeli = document.gajiPegawai.jumlah.value;
+        let hargaMotor = 0;
+        let totalHarga = 0;
+        let bonus = 'Tidak Ada Bonus';
+
+        const DataMotor = {
+            vario: {
+                harga: 20000000,
+                bonus: 'Helm'
+            },
+            beat: {
+                harga: 15000000,
+                bonus: 'Sepatu'
+            },
+            megapro: {
+                harga: 25000000,
+                bonus: 'Jaket'
+            }
+        }
+
+        switch (merkMotor) {
+            case "Vario":
+                hargaMotor = DataMotor.vario.harga;
+                bonus = DataMotor.vario.bonus;
+                break;
+            case "Beat":
+                hargaMotor = DataMotor.beat.harga;
+                bonus = DataMotor.beat.bonus;
+                break;
+            case "Megapro":
+                hargaMotor = DataMotor.megapro.harga;
+                bonus = DataMotor.megapro.bonus;
+                break;
+          
+        }
+
+        totalHarga = hargaMotor * jumlahDibeli;
+        
+        document.gajiPegawai.fieldHargaMotor.value = hargaMotor;
+        document.gajiPegawai.fieldTotalHarga.value = totalHarga;
+        document.gajiPegawai.fieldBonus.value = bonus;  
+    }
+</script>

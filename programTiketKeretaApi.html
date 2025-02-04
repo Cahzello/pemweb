@@ -1,0 +1,138 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="w3.css">
+</head>
+
+<center>
+    <div class="w3-container">
+        <form name="tiketKereta">
+            <div class="w3-panel w3-red">
+                <h1>Program Penjualan Tiket Kereta Api</h1>
+            </div>
+
+            <div class="w3-panel w3-cyan">
+                <table>
+                    <tr>
+                        <td>Nama Pemesan</td>
+                        <td><input type="text" name="namaPegawai"></td>
+                    </tr>
+                    <tr>
+                        <td>Kota Tujuan</td>
+                        <td>
+                            <select name="kota">
+                                <option value="Bandung">Bandung</option>
+                                <option value="Jakarta">Jakarta</option>
+                                <option value="Surabaya">Surabaya</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kelas</td>
+                        <td>
+                            <input type="radio" name="kelas" value="Ekonomi">Ekonomi
+                            <input type="radio" name="kelas" value="Bisnis">Bisnis
+                            <input type="radio" name="kelas" value="Eksekutif">Eksekutif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Tiket</td>
+                        <td>
+                            <select name="jumlah">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <table>
+                    <tr>
+                        <td>
+                            Harga Tiket
+                        </td>
+                        <td><input type="text" name="fieldHargaTiket"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total Harga
+                        </td>
+                        <td><input type="text" name="fieldTotalHarga"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="w3-panel w3-blue">
+                <p>
+                    <input type="button" value="Proses" class="w3-btn w3-red w3-round-xxlarge" onclick="hitung()">
+                    <input type="reset" value="Reset" class="w3-btn w3-yellow w3-round-xxlarge">
+                </p>
+            </div>
+
+        </form>
+    </div>
+</center>
+
+<script>
+    function hitung() {
+        let kota = document.tiketKereta.kota.value;
+        let kelas = document.tiketKereta.kelas.value;
+        let jumlah = document.tiketKereta.jumlah.value;
+        
+        let hargaTiket = 0;
+        let totalHarga = 0;
+
+        const DataTiket = {
+            bandung: {
+                ekonomi: 70000,
+                bisnis: 80000,
+                eksekutif: 90000,
+            },
+            jakarta: {
+                ekonomi: 100000,
+                bisnis: 150000,
+                eksekutif: 200000,
+            },
+            surabaya: {
+                ekonomi: 150000,
+                bisnis: 200000,
+                eksekutif: 300000,
+            },
+        }
+
+        switch (kota) {
+            case "Bandung":
+                if(kelas === 'Ekonomi'){
+                    hargaTiket += DataTiket.bandung.ekonomi
+                } else if (kelas === 'Bisnis'){
+                    hargaTiket += DataTiket.bandung.bisnis
+                } else if (kelas === 'Eksekutif') {
+                    hargaTiket += DataTiket.bandung.eksekutif
+                }
+                break;
+            case "Jakarta":
+                if(kelas === 'Ekonomi'){
+                    hargaTiket += DataTiket.jakarta.ekonomi
+                } else if (kelas === 'Bisnis'){
+                    hargaTiket += DataTiket.jakarta.bisnis
+                } else if (kelas === 'Eksekutif') {
+                    hargaTiket += DataTiket.jakarta.eksekutif
+                }
+                break;
+            case "Surabaya":
+                if(kelas === 'Ekonomi'){
+                    hargaTiket += DataTiket.surabaya.ekonomi
+                } else if (kelas === 'Bisnis'){
+                    hargaTiket += DataTiket.surabaya.bisnis
+                } else if (kelas === 'Eksekutif') {
+                    hargaTiket += DataTiket.surabaya.eksekutif
+                }
+                break;
+        }
+
+        totalHarga = hargaTiket * jumlah;
+        
+        document.tiketKereta.fieldHargaTiket.value = hargaTiket;
+        document.tiketKereta.fieldTotalHarga.value = totalHarga;
+    }
+</script>

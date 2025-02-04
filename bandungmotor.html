@@ -1,0 +1,163 @@
+<center>
+    <h1>Bandung Motor</h1>
+    <hr>
+    <form name="motorbandung" method="GET">
+        <table>
+            <tr>
+                <td>Motor :</td>
+                <td>
+                    <select name="motor">
+                        <option value="Vario">Vario</option>
+                        <option value="Beat">Beat</option>
+                        <option value="Mio">Mio</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="4">Aksesoris :</td>
+                <td>
+                    <input type="checkbox" name="aksesoris" value="Velg">Velg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" name="aksesoris" value="Jaket">Jaket
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" name="aksesoris" value="Ban">Ban
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" name="aksesoris" value="Helm">Helm
+                </td>
+
+            </tr>
+
+        </table>
+        <hr>
+        <div class="loading" style="display: none;">
+            <h3>Processing...</h3>
+            <span class="loader"></span>
+        </div>
+        <div class="output">
+
+
+            <table>
+                <tr>
+                    <td>Harga Motor :
+                    </td>
+                    <td>
+                        <input type="text" name="hargaMotor" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Harga Aksesoris :
+                    </td>
+                    <td>
+                        <input type="text" name="hargaAkesoris" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total :
+
+                    </td>
+                    <td>
+                        <input type="text" name="Total" readonly>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <input type="button" value="Proses" onclick="hitung()">
+        <input type="reset" value="Reset">
+
+    </form>
+
+    <script>
+        function hitung() {
+            const loadingDiv = document.querySelector('.loading');
+            const output = document.querySelector('.output');
+            output.style.display = 'none';
+            loadingDiv.style.display = 'block';
+
+            setTimeout(() => {
+                innerFunc();
+
+                loadingDiv.style.display = 'none';
+                output.style.display = 'block';
+            }, 2000);
+
+            function innerFunc() {
+                let motor = document.motorbandung.motor.value;
+                let aksesoris = document.motorbandung.aksesoris;
+                let outputHargaMotor = document.motorbandung.hargaMotor;
+                let outputHargaAksesoris = document.motorbandung.hargaAkesoris;
+                let outputTotal = document.motorbandung.Total;
+
+                let hargaMotor = 0;
+                let hargaAksesoris = 0;
+                let total = 0;
+
+                if (motor == "Vario") {
+                    hargaMotor = 16000000;
+                } else if (motor == "Beat") {
+                    hargaMotor = 13000000;
+                } else if (motor == "Mio") {
+                    hargaMotor = 15000000;
+                }
+
+                for (let i = 0; i < aksesoris.length; i++) {
+                    if (aksesoris[i].value === 'Ban' && aksesoris[i].checked == true) {
+                        hargaAksesoris += 350000;
+                    } else if (aksesoris[i].value === 'Velg' && aksesoris[i].checked == true) {
+                        hargaAksesoris += 250000;
+                    } else if (aksesoris[i].value === 'Jaket' && aksesoris[i].checked == true) {
+                        hargaAksesoris += 150000;
+                    } else if (aksesoris[i].value === 'Helm' && aksesoris[i].checked == true) {
+                        hargaAksesoris += 125000;
+                    } else {
+                        hargaAksesoris += 0
+                    }
+                }
+
+                total = hargaMotor + hargaAksesoris;
+
+                outputHargaMotor.value = hargaMotor;
+                outputHargaAksesoris.value = hargaAksesoris;
+                outputTotal.value = total;
+            }
+
+
+        }
+    </script>
+
+    <style>
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #FF3D00;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</center>
