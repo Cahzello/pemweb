@@ -1,0 +1,265 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="w3.css">
+</head>
+
+<center>
+    <div class="w3-container">
+        <form name="tiketKereta">
+            <div class="w3-panel w3-red">
+                <h1>Program Pengiriman Paket</h1>
+            </div>
+
+            <div class="w3-panel w3-cyan">
+                <table>
+                    <tr>
+                        <td>Kota Tujuan</td>
+                        <td>
+                            <select name="kota">
+                                <option value="Bandung">Bandung</option>
+                                <option value="Jakarta">Jakarta</option>
+                                <option value="Surabaya">Surabaya</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pilih Kurir</td>
+                        <td>
+                            <select name="kurir">
+                                <option value="JNE">JNE</option>
+                                <option value="TIKI">TIKI</option>
+                                <option value="ANTERAJA">ANTERAJA</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tipe Pengiriman</td>
+                        <td>
+                            <select name="kelas">
+                                <option value="Ekonomi">Ekonomi</option>
+                                <option value="Reguler">Reguler</option>
+                                <option value="Kilat">Kilat</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Berat Pengiriman</td>
+                        <td>
+                            <input type="number" name="berat">
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <table>
+                    <tr>
+                        <td>
+                            Harga per KG
+                        </td>
+                        <td><input type="text" name="fieldHargaKG" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Sub Total
+                        </td>
+                        <td><input type="text" name="fieldSubTotal" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Diskon
+                        </td>
+                        <td><input type="text" name="fieldDiskon" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total
+                        </td>
+                        <td><input type="text" name="fieldTotal" readonly></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="w3-panel w3-blue">
+                <p>
+                    <input type="button" value="Proses" class="w3-btn w3-red w3-round-xxlarge" onclick="hitung()">
+                    <input type="reset" value="Reset" class="w3-btn w3-yellow w3-round-xxlarge">
+                </p>
+            </div>
+
+        </form>
+    </div>
+</center>
+
+<script>
+    function hitung() {
+        let kota = document.tiketKereta.kota.value;
+        let kurir = document.tiketKereta.kurir.value;
+        let kelas = document.tiketKereta.kelas.value;
+        let berat = document.tiketKereta.berat.value;
+
+        let hargaPerKG = 0;
+        let subTotal = 0;
+        let diskon = 0;
+        let total = 0;
+
+        const DataKurir = {
+            jne: {
+                bandung: {
+                    ekonomi: 5000,
+                },
+                jakarta: {
+                    ekonomi: 6000
+                },
+                surabaya: {
+                    ekonomi: 7000
+                }
+            },
+            tiki: {
+                bandung: {
+                    ekonomi: 6000,
+                },
+                jakarta: {
+                    ekonomi: 7000
+                },
+                surabaya: {
+                    ekonomi: 8000
+                }
+            },
+            anterAja: {
+                bandung: {
+                    ekonomi: 7000,
+                },
+                jakarta: {
+                    ekonomi: 8000
+                },
+                surabaya: {
+                    ekonomi: 9000
+                }
+            },
+        }
+
+        switch (kurir) {
+            case "JNE":
+                if (kota === 'Bandung') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.jne.bandung.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.jne.bandung.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.jne.bandung.ekonomi + 2000
+
+                    }
+                } else if (kota === 'Jakarta') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.jne.jakarta.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.jne.jakarta.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.jne.jakarta.ekonomi + 2000
+                    }
+                } else if (kota === 'Surabaya') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.jne.surabaya.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.jne.surabaya.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.jne.surabaya.ekonomi + 2000
+                    }
+                }
+                break;
+            case "TIKI":
+                if (kota === 'Bandung') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.tiki.bandung.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.tiki.bandung.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.tiki.bandung.ekonomi + 2000
+
+                    }
+                } else if (kota === 'Jakarta') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.tiki.jakarta.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.tiki.jakarta.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.tiki.jakarta.ekonomi + 2000
+                    }
+                } else if (kota === 'Surabaya') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.tiki.surabaya.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.tiki.surabaya.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.tiki.surabaya.ekonomi + 2000
+                    }
+                }
+                break;
+            case "ANTERAJA":
+                if (kota === 'Bandung') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.anterAja.bandung.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.anterAja.bandung.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.anterAja.bandung.ekonomi + 2000
+
+                    }
+                } else if (kota === 'Jakarta') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.anterAja.jakarta.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.anterAja.jakarta.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.anterAja.jakarta.ekonomi + 2000
+                    }
+                } else if (kota === 'Surabaya') {
+                    switch (kelas) {
+                        case "Ekonomi":
+                            hargaPerKG += DataKurir.anterAja.surabaya.ekonomi
+                            break;
+                        case "Reguler":
+                            hargaPerKG += DataKurir.anterAja.surabaya.ekonomi + 1000
+                        case "Kilat":
+                            hargaPerKG += DataKurir.anterAja.surabaya.ekonomi + 2000
+                    }
+                }
+                break;
+            
+        }
+
+        if (berat > 5){
+            hargaPerKG = 0
+            alert('Berat tidak bisa melebihi 5KG. ');
+        }
+
+        subTotal = hargaPerKG * berat
+
+        if(subTotal > 15000) {
+            diskon = subTotal * 0.1
+            total = subTotal - diskon
+        }
+
+
+        document.tiketKereta.fieldHargaKG.value = hargaPerKG;
+        document.tiketKereta.fieldSubTotal.value = subTotal;
+        document.tiketKereta.fieldDiskon.value = diskon;
+        document.tiketKereta.fieldTotal.value = total;
+
+    }
+</script>
